@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pendant"
+version = "0.0.1"
+description = "Utility for interacting with obsidian markdown"
+authors = ["Russ Cox"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pydantic = "^1.8.1"
+requests = "^2.25.1"
+python-frontmatter = "^1.0.0"
+fire = "^0.4.0"
+cryptography = "^3.4.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
