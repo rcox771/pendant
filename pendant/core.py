@@ -1,9 +1,13 @@
 from pydantic import BaseModel
 from urllib.parse import urlencode, quote
+import urllib.request
 from .paths import PENDANT_CONFIG
 import dbm
 import sys
 from typing import Any
+from datetime import datetime
+import re
+import shutil
 
 
 def ack(k, v):
@@ -80,9 +84,27 @@ class PendantConfig(BaseModel):
 class Vault(BaseModel):
     path: str = PendantConfig().get("vault")
 
-    def open(self, note: str, text: str, frontmatter=None):
-        d = dict(vault=self.path, file=note)
-        return f"obsidian://open?{urlencode(d, quote_via=quote)}"
+
+def write_file(path, text=""):
+    with open(path, "w") as f:
+        f.write(text)
 
 
-v = Vault()
+def read_file(path):
+    with open(path, "r") as f:
+        text = f.read()
+    return text
+
+
+def update_file(path, func):
+    text = read_file(path)
+    new_text = func(text)
+    write_file(path, text=new_text)
+
+
+def move_file(src, dest):
+    shutil.move_file(src, dest)
+
+
+# v = Vault()
+# v.open("test_note.md", "blabhalbhalhbalhlbhablahblhabhalbha")
