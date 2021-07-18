@@ -1,12 +1,3 @@
-from pydantic import BaseModel
-from urllib.parse import urlencode, quote
-import urllib.request
-from .paths import PENDANT_CONFIG
-import dbm
-import sys
-from typing import Any
-from datetime import datetime
-import re
 import shutil
 from rich.prompt import Confirm
 from pathlib import Path
@@ -41,7 +32,7 @@ def update_file(path, func):
 
 
 def move_file(src, dest):
-    shutil.move_file(src, dest)
+    shutil.move(src, dest)
 
 
 
